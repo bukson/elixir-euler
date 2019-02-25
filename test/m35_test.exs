@@ -2,9 +2,10 @@ defmodule M35Test do
   use ExUnit.Case
   doctest M35
 
-  defp mod(n, d), do: rem(n, d)
-	defp mod3(n), do: mod(n, 3)
-	defp mod5(n), do: mod(n, 5)
+  defp modd(d), do: (fn n -> rem(n, d) end)
+	defp mod3(n), do: modd(3).(n)
+	defp mod5(n), do: modd(5).(n)
+
 	def naive_of(n) do
 		1..n-1 
 		|> Stream.filter(&mod5(&1) == 0 || mod3(&1) == 0)
